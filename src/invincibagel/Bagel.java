@@ -28,6 +28,7 @@ public class Bagel extends Hero {
         setBoundaries();
         setImageState();
         moveInvinciBagel(iX, iY);
+        playAudioClip();
     }
     
     @Override
@@ -94,6 +95,15 @@ public class Bagel extends Hero {
     private void moveInvinciBagel(double x, double y) {
         spriteFrame.setTranslateX(x);
         spriteFrame.setTranslateY(y);
+    }
+    
+    private void playAudioClip() {
+        if(invinciBagel.isLeft()) { invinciBagel.playiSound0(); }
+        if(invinciBagel.isRight()) { invinciBagel.playiSound1(); }
+        if(invinciBagel.isUp()) { invinciBagel.playiSound2(); }
+        if(invinciBagel.isDown()) { invinciBagel.playiSound3(); }
+        if(invinciBagel.iswKey()) { invinciBagel.playiSound4(); }
+        if(invinciBagel.issKey()) { invinciBagel.playiSound5(); }
     }
 
     private void setBoundaries() {

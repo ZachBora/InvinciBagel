@@ -5,6 +5,7 @@
  */
 package invincibagel;
 
+import java.net.URL;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -24,6 +26,8 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
     static final double WIDTH = 640, HEIGHT = 400;
+    private AudioClip iSound0, iSound1, iSound2, iSound3, iSound4, iSound5;
+    private URL iAudioFile0, iAudioFile1, iAudioFile2, iAudioFile3, iAudioFile4, iAudioFile5;
     private boolean up, down, left, right, aKey, dKey, sKey, wKey;
     private StackPane root;
     private HBox buttonContainer;
@@ -50,6 +54,7 @@ public class InvinciBagel extends Application {
         primaryStage.show();
         createSceneEventHandling();
         loadImageAssets();
+        loadAudioAssets();
         createGameActors();
         addGameActorNodes();
         createCastingDirection();
@@ -223,6 +228,45 @@ public class InvinciBagel extends Application {
         iB8 = new Image("/sprite8.png", 81, 81, true, false, true);
         iP0 = new Image("/prop0.png", 72, 32, true, false, true);
         iP1 = new Image("/prop1.png", 496, 92, true, false, true);
+    }
+    
+    private void loadAudioAssets() {
+        iAudioFile0 = getClass().getResource("/leftmono.wav");
+        iSound0 = new AudioClip(iAudioFile0.toString());
+        iAudioFile1 = getClass().getResource("/rightmono.wav");
+        iSound1 = new AudioClip(iAudioFile1.toString());
+        iAudioFile2 = getClass().getResource("/upmono.wav");
+        iSound2 = new AudioClip(iAudioFile2.toString());
+        iAudioFile3 = getClass().getResource("/downmono.wav");
+        iSound3 = new AudioClip(iAudioFile3.toString());
+        iAudioFile4 = getClass().getResource("/wmono.wav");
+        iSound4 = new AudioClip(iAudioFile4.toString());
+        iAudioFile5 = getClass().getResource("/smono.wav");
+        iSound5 = new AudioClip(iAudioFile5.toString());
+    }
+
+    public void playiSound0() {
+        this.iSound0.play();
+    }
+
+    public void playiSound1() {
+        this.iSound1.play();
+    }
+
+    public void playiSound2() {
+        this.iSound2.play();
+    }
+
+    public void playiSound3() {
+        this.iSound3.play();
+    }
+
+    public void playiSound4() {
+        this.iSound4.play();
+    }
+
+    public void playiSound5() {
+        this.iSound5.play();
     }
 
     private void createGameActors() {
