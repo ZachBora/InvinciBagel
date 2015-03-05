@@ -3,6 +3,8 @@ package invincibagel;
 import static invincibagel.InvinciBagel.HEIGHT;
 import static invincibagel.InvinciBagel.WIDTH;
 import javafx.scene.image.Image;
+import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.Shape;
 
 public class Bagel extends Hero {
 
@@ -28,12 +30,22 @@ public class Bagel extends Hero {
         setBoundaries();
         setImageState();
         moveInvinciBagel(iX, iY);
-        playAudioClip();
+        //playAudioClip();
+        checkCollision();
     }
     
     @Override
     public boolean collide(Actor object) {
-        return false;
+        boolean collisionDetect = false;
+        
+        if(invinciBagel.iBagel.spriteFrame.getBoundsInParent().intersects(object.getSpriteFrame().getBoundsInParent())) {
+            Shape intersection = SVGPath.intersect(invinciBagel.iBagel.getSpriteBound(), object.getSpriteBound());
+            if(intersection.getBoundsInLocal().getWidth() != -1) {
+                collisionDetect = true;
+            }
+        }
+        
+        return collisionDetect;
     }
     
     private void setXYLocation() {
@@ -113,4 +125,16 @@ public class Bagel extends Hero {
         if (iY < topBoundary) { iY = topBoundary; }
     }
     
+    public void checkCollision() {
+        for(int i=0; i<invinciBagel.castDirector.getCurrentCast().size(); i++) {
+            Actor object = invinciBagel.castDirector.getCurrentCast().get(i);
+            
+            if(collide(object)) {
+                invinciBagel.playiSound0();
+                invinciBagel.castDirector.addToRemovedActors(object);
+                invinciBagel.root.getChildren().remove(object.getSpriteFrame());
+                invinciBagel.castDirector.resetRemovedActors();
+            }
+        }
+    }
 }
