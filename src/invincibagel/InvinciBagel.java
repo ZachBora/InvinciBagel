@@ -9,13 +9,13 @@ import java.net.URL;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -29,7 +29,7 @@ public class InvinciBagel extends Application {
     private AudioClip iSound0, iSound1, iSound2, iSound3, iSound4, iSound5;
     private URL iAudioFile0, iAudioFile1, iAudioFile2, iAudioFile3, iAudioFile4, iAudioFile5;
     private boolean up, down, left, right, aKey, dKey, sKey, wKey;
-    StackPane root;
+    Group root;
     private HBox buttonContainer;
     Bagel iBagel;
     Prop iPR0, iPR1;
@@ -48,7 +48,7 @@ public class InvinciBagel extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("InvinciBagel");
-        root = new StackPane();
+        root = new Group();
         scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -136,7 +136,7 @@ public class InvinciBagel extends Application {
     
     private void createSplashScreenNodes() {
         buttonContainer = new HBox(12);
-        buttonContainer.setAlignment(Pos.BOTTOM_LEFT);
+        buttonContainer.setLayoutY(365);
         buttonContainerPadding = new Insets(0, 0, 10, 16);
         buttonContainer.setPadding(buttonContainerPadding);
         gameButton = new Button();
@@ -272,7 +272,7 @@ public class InvinciBagel extends Application {
     private void createGameActors() {
         iBagel = new Bagel(this, 
                 "M58,8 L58,8 43,24 32,28 32,41 18,41 28,54 40,61 35,73 41,79 45,54 55,39 65,40 69,25 Z", 
-                0, 0, iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8);
+                WIDTH/2, HEIGHT/2, iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8);
         iPR0 = new Prop("M0,0 L0,32 72,32 72,0 Z", 0, 148, iP0);
         iPH0 = new PropH("M0,0 L0,32 72,32 72,0 Z", 72, 148, iP0);
         iPV0 = new PropV("M0,0 L0,32 72,32 72,0 Z", 0, 116, iP0);
