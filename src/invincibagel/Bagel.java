@@ -49,10 +49,10 @@ public class Bagel extends Hero {
     }
     
     private void setXYLocation() {
-        if(invinciBagel.isRight()) { iX += vX; }
-        if(invinciBagel.isLeft()) { iX -= vX; }
-        if(invinciBagel.isDown()) { iY += vY; }
-        if(invinciBagel.isUp()) { iY -= vY; }
+        if(invinciBagel.isRight()) { iX += vX * 2; }
+        if(invinciBagel.isLeft()) { iX -= vX * 2; }
+        if(invinciBagel.isDown()) { iY += vY * 2; }
+        if(invinciBagel.isUp()) { iY -= vY * 2; }
     }
     
     private void setImageState() {
@@ -142,18 +142,27 @@ public class Bagel extends Hero {
         if(object instanceof Prop) {
             invinciBagel.gameScore -= 1;
             invinciBagel.playiSound0();
-        }else if(object instanceof PropV) {
+        } else if(object instanceof PropV) {
             invinciBagel.gameScore -= 2;
             invinciBagel.playiSound1();
-        }else if(object instanceof PropH) {
+        } else if(object instanceof PropH) {
             invinciBagel.gameScore -= 1;
             invinciBagel.playiSound2();
-        }else if(object instanceof PropB) {
+        } else if(object instanceof PropB) {
             invinciBagel.gameScore -= 2;
             invinciBagel.playiSound3();
-        }else if(object instanceof Treasure) {
+        } else if(object instanceof Treasure) {
             invinciBagel.gameScore += 5;
             invinciBagel.playiSound4();
+        } else if(object.equals(invinciBagel.iBullet)) {
+            invinciBagel.gameScore -= 5;
+            invinciBagel.playiSound5();
+        } else if(object.equals(invinciBagel.iCheese)) {
+            invinciBagel.gameScore += 5;
+            invinciBagel.playiSound0();
+        } else if(object.equals(invinciBagel.iBeagle)) {
+            invinciBagel.gameScore += 10;
+            invinciBagel.playiSound0();
         }
         invinciBagel.scoreText.setText(String.valueOf(invinciBagel.gameScore));
     }

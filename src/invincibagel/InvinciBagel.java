@@ -320,9 +320,10 @@ public class InvinciBagel extends Application {
         iPB0 = new PropB("M0,0 L0,32 72,32 72,0 Z", 512, 316, iP0);
         iTR0 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 50, 105, iT0);
         iTR1 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 533, 206, iT1);
-        iBeagle = new Enemy("M0 6 L0 52 70 52 70 70 70 93 115 45 115 0 84 0 68 16 Z", 520, 160, iE0);
-        iBullet = new Projectile("M0 4 L0 16 64 16 64 4 Z", 8, 8, iC0);
-        iCheese = new Projectile("M0 0 L0 32 29 32 29 0 Z", 96, 8, iC1);
+        iBeagle = new Enemy(this, "M0 6 L0 52 70 52 70 70 70 93 115 45 115 0 84 0 68 16 Z", -116, 0, iE0);
+        iBullet = new Projectile("M0 4 L0 16 64 16 64 4 Z", -70, 0, iC0);
+        //iCheese = new Projectile("M0 0 L0 32 32 32 32 0 Z", -32, 0, iC1);
+        iCheese = new Projectile("M0 4 L0 16 64 16 64 4 Z", -32, 0, iC1);
         //iPV1 = new PropV("M150 0 L75 200 L225 200 Z", 0, -58, iP1);
         //iPR1 = new Prop("M150 0 L75 200 L225 200 Z", 0, -150, iP1);
     }
@@ -334,12 +335,12 @@ public class InvinciBagel extends Application {
         root.getChildren().add(iPV0.spriteFrame);
         //root.getChildren().add(iPV1.spriteFrame);
         root.getChildren().add(iPB0.spriteFrame);
-        root.getChildren().add(iBagel.spriteFrame);
         root.getChildren().add(iTR0.spriteFrame);
         root.getChildren().add(iTR1.spriteFrame);
-        root.getChildren().add(iBeagle.spriteFrame);
         root.getChildren().add(iBullet.spriteFrame);
         root.getChildren().add(iCheese.spriteFrame);
+        root.getChildren().add(iBeagle.spriteFrame);
+        root.getChildren().add(iBagel.spriteFrame);
     }
 
     private void createCastingDirection() {

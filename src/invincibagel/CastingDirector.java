@@ -23,7 +23,11 @@ public class CastingDirector {
     }
     
     public void addCurrentCast(Actor... actors) {
-        CURRENT_CAST.addAll(Arrays.asList(actors));
+        if (actors.length > 1) {
+            CURRENT_CAST.addAll(Arrays.asList(actors));
+        } else {
+            CURRENT_CAST.add(actors[0]);
+        }   
     }
     
     public void removeCurrentCast(Actor... actors) {
