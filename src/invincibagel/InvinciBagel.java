@@ -36,14 +36,16 @@ public class InvinciBagel extends Application {
     Group root;
     private HBox buttonContainer;
     Bagel iBagel;
+    Enemy iBeagle;
+    Projectile iBullet, iCheese;
     Prop iPR0, iPR1;
     PropH iPH0;
     PropV iPV0, iPV1;
     PropB iPB0;
     private Scene scene;
-    private Image splashScreen, instructionLayer, legalLayer, scoresLayer;
+    private Image splashScreen, instructionLayer, legalLayer, scoresLayer, skyCloud;
     Treasure iTR0, iTR1;
-    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8, iP0, iP1, iT0, iT1;
+    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8, iP0, iT0, iT1, iE0, iC0, iC1;
     private ImageView splashScreenBackplate, splashScreenTextArea;
     private Button gameButton, helpButton, scoreButton, legalButton;
     private Insets buttonContainerPadding;
@@ -161,29 +163,43 @@ public class InvinciBagel extends Application {
         gameButton.setLayoutX(0);
         gameButton.setText("PLAY GAME");
         gameButton.setOnAction((ActionEvent) -> {
-            splashScreenBackplate.setVisible(false);
+            splashScreenBackplate.setVisible(true);
+            splashScreenBackplate.setImage(skyCloud);
+            splashScreenBackplate.toBack();
             splashScreenTextArea.setVisible(false);
         });
         helpButton = new Button();
         helpButton.setText("INSTRUCTIONS");
         helpButton.setOnAction((ActionEvent) -> {
             splashScreenBackplate.setVisible(true);
+            splashScreenBackplate.setImage(splashScreen);
+            splashScreenBackplate.toFront();
             splashScreenTextArea.setVisible(true);
             splashScreenTextArea.setImage(instructionLayer);
+            splashScreenTextArea.toFront();
+            buttonContainer.toFront();
         });
         scoreButton = new Button();
         scoreButton.setText("HIGH SCORES");
         scoreButton.setOnAction((ActionEvent) -> {
             splashScreenBackplate.setVisible(true);
+            splashScreenBackplate.setImage(splashScreen);
+            splashScreenBackplate.toFront();
             splashScreenTextArea.setVisible(true);
             splashScreenTextArea.setImage(scoresLayer);
+            splashScreenTextArea.toFront();
+            buttonContainer.toFront();
         });
         legalButton = new Button();
         legalButton.setText("LEGAL & CREDITS");
         legalButton.setOnAction((ActionEvent) -> {
             splashScreenBackplate.setVisible(true);
+            splashScreenBackplate.setImage(splashScreen);
+            splashScreenBackplate.toFront();
             splashScreenTextArea.setVisible(true);
             splashScreenTextArea.setImage(legalLayer);
+            splashScreenTextArea.toFront();
+            buttonContainer.toFront();
         });
         buttonContainer.getChildren().addAll(gameButton, helpButton, scoreButton, legalButton);
         splashScreenBackplate = new ImageView();
@@ -247,9 +263,12 @@ public class InvinciBagel extends Application {
         iB7 = new Image("/sprite7.png", 81, 81, true, false, true);
         iB8 = new Image("/sprite8.png", 81, 81, true, false, true);
         iP0 = new Image("/prop0.png", 72, 32, true, false, true);
-        iP1 = new Image("/prop1.png", 496, 92, true, false, true);
         iT0 = new Image("/treasure1.png", 64, 64, true, false, true);
         iT1 = new Image("/treasure2.png", 64, 64, true, false, true);
+        iE0 = new Image("/enemy.png", 70, 116, true, false, true);
+        iC0 = new Image("/bullet.png", 64, 24, true, false, true);
+        iC1 = new Image("/cheese.png", 32, 29, true, false, true);
+        skyCloud = new Image("/skycloud.png", 640, 400, true, false, true);
     }
     
     private void loadAudioAssets() {
@@ -301,6 +320,9 @@ public class InvinciBagel extends Application {
         iPB0 = new PropB("M0,0 L0,32 72,32 72,0 Z", 512, 316, iP0);
         iTR0 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 50, 105, iT0);
         iTR1 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 533, 206, iT1);
+        iBeagle = new Enemy("M0 6 L0 52 70 52 70 70 70 93 115 45 115 0 84 0 68 16 Z", 520, 160, iE0);
+        iBullet = new Projectile("M0 4 L0 16 64 16 64 4 Z", 8, 8, iC0);
+        iCheese = new Projectile("M0 0 L0 32 29 32 29 0 Z", 96, 8, iC1);
         //iPV1 = new PropV("M150 0 L75 200 L225 200 Z", 0, -58, iP1);
         //iPR1 = new Prop("M150 0 L75 200 L225 200 Z", 0, -150, iP1);
     }
@@ -315,10 +337,13 @@ public class InvinciBagel extends Application {
         root.getChildren().add(iBagel.spriteFrame);
         root.getChildren().add(iTR0.spriteFrame);
         root.getChildren().add(iTR1.spriteFrame);
+        root.getChildren().add(iBeagle.spriteFrame);
+        root.getChildren().add(iBullet.spriteFrame);
+        root.getChildren().add(iCheese.spriteFrame);
     }
 
     private void createCastingDirection() {
         castDirector = new CastingDirector();
-        castDirector.addCurrentCast(iPR0, iPH0, iPV0, iPB0, iTR0, iTR1);
+        castDirector.addCurrentCast(iPR0, iPH0, iPV0, iPB0, iTR0, iTR1, iBeagle, iBullet, iCheese);
     }
 }
