@@ -42,7 +42,8 @@ public class InvinciBagel extends Application {
     PropB iPB0;
     private Scene scene;
     private Image splashScreen, instructionLayer, legalLayer, scoresLayer;
-    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8, iP0, iP1;
+    Treasure iTR0, iTR1;
+    private Image iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8, iP0, iP1, iT0, iT1;
     private ImageView splashScreenBackplate, splashScreenTextArea;
     private Button gameButton, helpButton, scoreButton, legalButton;
     private Insets buttonContainerPadding;
@@ -247,6 +248,8 @@ public class InvinciBagel extends Application {
         iB8 = new Image("/sprite8.png", 81, 81, true, false, true);
         iP0 = new Image("/prop0.png", 72, 32, true, false, true);
         iP1 = new Image("/prop1.png", 496, 92, true, false, true);
+        iT0 = new Image("/treasure1.png", 64, 64, true, false, true);
+        iT1 = new Image("/treasure2.png", 64, 64, true, false, true);
     }
     
     private void loadAudioAssets() {
@@ -292,10 +295,12 @@ public class InvinciBagel extends Application {
         iBagel = new Bagel(this, 
                 "M58,8 L58,8 43,24 32,28 32,41 18,41 28,54 40,61 35,73 41,79 45,54 55,39 65,40 69,25 Z", 
                 WIDTH/2, HEIGHT/2, iB0, iB1, iB2, iB3, iB4, iB5, iB6, iB7, iB8);
-        iPR0 = new Prop("M0,0 L0,32 72,32 72,0 Z", 0, 148, iP0);
-        iPH0 = new PropH("M0,0 L0,32 72,32 72,0 Z", 72, 148, iP0);
-        iPV0 = new PropV("M0,0 L0,32 72,32 72,0 Z", 0, 116, iP0);
-        iPB0 = new PropB("M0,0 L0,32 72,32 72,0 Z", 72, 116, iP0);
+        iPR0 = new Prop("M0,0 L0,32 72,32 72,0 Z", 30, 48, iP0);
+        iPH0 = new PropH("M0,0 L0,32 72,32 72,0 Z", 172, 248, iP0);
+        iPV0 = new PropV("M0,0 L0,32 72,32 72,0 Z", 396, 116, iP0);
+        iPB0 = new PropB("M0,0 L0,32 72,32 72,0 Z", 512, 316, iP0);
+        iTR0 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 50, 105, iT0);
+        iTR1 = new Treasure("M0 0 L0 64 64 64 64 0 Z", 533, 206, iT1);
         //iPV1 = new PropV("M150 0 L75 200 L225 200 Z", 0, -58, iP1);
         //iPR1 = new Prop("M150 0 L75 200 L225 200 Z", 0, -150, iP1);
     }
@@ -308,10 +313,12 @@ public class InvinciBagel extends Application {
         //root.getChildren().add(iPV1.spriteFrame);
         root.getChildren().add(iPB0.spriteFrame);
         root.getChildren().add(iBagel.spriteFrame);
+        root.getChildren().add(iTR0.spriteFrame);
+        root.getChildren().add(iTR1.spriteFrame);
     }
 
     private void createCastingDirection() {
         castDirector = new CastingDirector();
-        castDirector.addCurrentCast(iPR0, iPH0, iPV0, iPB0);
+        castDirector.addCurrentCast(iPR0, iPH0, iPV0, iPB0, iTR0, iTR1);
     }
 }
