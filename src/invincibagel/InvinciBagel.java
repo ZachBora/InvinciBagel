@@ -8,7 +8,6 @@ package invincibagel;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +17,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +27,9 @@ import javafx.stage.Stage;
  */
 public class InvinciBagel extends Application {
     static final double WIDTH = 640, HEIGHT = 400;
+    int gameScore = 0;
+    Text scoreText, scoreLabel;
+    private Font scoreFont;
     private AudioClip iSound0, iSound1, iSound2, iSound3, iSound4, iSound5;
     private URL iAudioFile0, iAudioFile1, iAudioFile2, iAudioFile3, iAudioFile4, iAudioFile5;
     private boolean up, down, left, right, aKey, dKey, sKey, wKey;
@@ -135,6 +139,19 @@ public class InvinciBagel extends Application {
     }
     
     private void createSplashScreenNodes() {
+        scoreText = new Text();
+        scoreText.setText(String.valueOf(gameScore));
+        scoreText.setLayoutX(525);
+        scoreText.setLayoutY(385);
+        scoreFont = new Font("Verdana", 20);
+        scoreText.setFont(scoreFont);
+        scoreText.setFill(Color.BLUE);
+        scoreLabel = new Text();
+        scoreLabel.setText("SCORE:");
+        scoreLabel.setLayoutY(385);
+        scoreLabel.setLayoutX(445);
+        scoreLabel.setFont(scoreFont);
+        scoreLabel.setFill(Color.BLACK);
         buttonContainer = new HBox(12);
         buttonContainer.setLayoutY(365);
         buttonContainerPadding = new Insets(0, 0, 10, 16);
@@ -178,6 +195,8 @@ public class InvinciBagel extends Application {
         root.getChildren().add(splashScreenBackplate);
         root.getChildren().add(splashScreenTextArea);
         root.getChildren().add(buttonContainer);
+        root.getChildren().add(scoreText);
+        root.getChildren().add(scoreLabel);
     }
 
     private void createSceneEventHandling() {

@@ -130,7 +130,6 @@ public class Bagel extends Hero {
             Actor object = invinciBagel.castDirector.getCurrentCast().get(i);
             
             if(collide(object)) {
-                invinciBagel.playiSound0();
                 invinciBagel.castDirector.addToRemovedActors(object);
                 invinciBagel.root.getChildren().remove(object.getSpriteFrame());
                 invinciBagel.castDirector.resetRemovedActors();
@@ -140,6 +139,19 @@ public class Bagel extends Hero {
     }
     
     private void scoringEngine(Actor object) {
-        
+        if(object instanceof Prop) {
+            invinciBagel.gameScore += 5;
+            invinciBagel.playiSound0();
+        }else if(object instanceof PropV) {
+            invinciBagel.gameScore += 4;
+            invinciBagel.playiSound1();
+        }else if(object instanceof PropH) {
+            invinciBagel.gameScore += 3;
+            invinciBagel.playiSound2();
+        }else if(object instanceof PropB) {
+            invinciBagel.gameScore += 2;
+            invinciBagel.playiSound3();
+        }
+        invinciBagel.scoreText.setText(String.valueOf(invinciBagel.gameScore));
     }
 }
